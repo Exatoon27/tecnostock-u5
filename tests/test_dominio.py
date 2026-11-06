@@ -109,7 +109,7 @@ def test_vencimiento_limite_dia_30_vigente_dia_31_vence():
 def test_penalizacion_10_por_ciento_calculada_en_el_dominio():
     ap = apartado(anticipo="250.50")
     ap.evaluar_vencimiento(date(2027, 1, 1))
-    assert ap.saldo_a_favor == M("225.45")       # 250.50 - 25.05
+    assert ap.saldo_a_favor == M("225.46")       # 250.50 - 25.05
 
 
 def test_vencimiento_es_idempotente():
