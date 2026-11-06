@@ -1,0 +1,39 @@
+..................................FF.................................F   [100%]
+================================== FAILURES ===================================
+_____________ test_anticipo_insuficiente_indica_minimo_y_faltante _____________
+
+    def test_anticipo_insuficiente_indica_minimo_y_faltante():
+        with pytest.raises(ReglaNegocioViolada) as e:
+            apartado(total="1000.00", anticipo="150.00")
+>       assert "mínimo 200.00" in str(e.value) and "faltan 50.00" in str(e.value)
+E       AssertionError: assert ('mínimo 200.00' in 'El anticipo debe ser >= 20% y no mayor al total (anticipo 150.00, total 1000.00)')
+E        +  where 'El anticipo debe ser >= 20% y no mayor al total (anticipo 150.00, total 1000.00)' = str(ReglaNegocioViolada('El anticipo debe ser >= 20% y no mayor al total (anticipo 150.00, total 1000.00)'))
+E        +    where ReglaNegocioViolada('El anticipo debe ser >= 20% y no mayor al total (anticipo 150.00, total 1000.00)') = <ExceptionInfo ReglaNegocioViolada('El anticipo debe ser >= 20% y no mayor al total (anticipo 150.00, total 1000.00)') tblen=4>.value
+
+tests\test_dominio.py:232: AssertionError
+_________________ test_venta_rechaza_la_misma_serie_dos_veces _________________
+
+    def test_venta_rechaza_la_misma_serie_dos_veces():
+>       with pytest.raises(ReglaNegocioViolada, match="serie repetida"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ReglaNegocioViolada
+
+tests\test_dominio.py:237: Failed
+_____________ test_rechazo_de_anticipo_informa_minimo_y_faltante ______________
+
+c = Contenedor(almacen=<src.infrastructure.memoria.Almacen object at 0x000002DEE2A72C50>, bus=<src.infrastructure.memoria....0002DEE2A7B2A0>, notificaciones=<src.application.manejadores.ApartadoVencidoEventHandler object at 0x000002DEE2A79AE0>)
+
+    def test_rechazo_de_anticipo_informa_minimo_y_faltante(c):    # TDD ciclo 1 (US-03)
+        with pytest.raises(ReglaNegocioViolada) as e:
+            apartar(c, anticipo="67.19")
+>       assert "mínimo 67.20" in str(e.value) and "faltan 0.01" in str(e.value)
+E       AssertionError: assert ('mínimo 67.20' in 'No se puede apartar: el anticipo debe ser >= 20% del total')
+E        +  where 'No se puede apartar: el anticipo debe ser >= 20% del total' = str(ReglaNegocioViolada('No se puede apartar: el anticipo debe ser >= 20% del total'))
+E        +    where ReglaNegocioViolada('No se puede apartar: el anticipo debe ser >= 20% del total') = <ExceptionInfo ReglaNegocioViolada('No se puede apartar: el anticipo debe ser >= 20% del total') tblen=3>.value
+
+tests\test_aplicacion.py:213: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_dominio.py::test_anticipo_insuficiente_indica_minimo_y_faltante
+FAILED tests/test_dominio.py::test_venta_rechaza_la_misma_serie_dos_veces - F...
+FAILED tests/test_aplicacion.py::test_rechazo_de_anticipo_informa_minimo_y_faltante
+3 failed, 67 passed in 0.19s

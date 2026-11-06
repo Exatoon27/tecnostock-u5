@@ -1,0 +1,3 @@
+ticket_id,fecha,sucursal_id,sku,numero_serie,precio_mxn,metodo_pago
+V-0001,2026-10-28,SUC-04,TEC-P013,SN-LAP-0011,1188.00,EFECTIVO
+V-0002,2026-10-15,SUC-04,TEC-P013,SN-LAP-0012,1188.00,TARJETA

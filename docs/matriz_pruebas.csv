@@ -1,0 +1,48 @@
+caso_id,regla,ref_brd,entrada,resultado_esperado,tipo,nivel,archivo,funcion,casos_ejecutados,resultado_real
+CP-01,Anticipo minimo 20%,N-02 / US-03,total 1000.00 anticipo 200.00,Apartado ACTIVO con vigencia de 30 dias,exito,unitaria,test_dominio.py,test_apartado_exito_emite_evento_y_vigencia_30_dias,1,PASSED
+CP-02,Anticipo minimo 20%,US-03,total 1000.00 anticipo 150.00,Rechazo que indica minimo 200.00 y faltan 50.00,error,unitaria,test_dominio.py,test_anticipo_insuficiente_indica_minimo_y_faltante,1,PASSED
+CP-03,Anticipo minimo 20%,US-03,anticipo igual al total,Apartado nace LIQUIDADO,limite,unitaria,test_dominio.py,test_apartado_anticipo_total_nace_liquidado,1,PASSED
+CP-04,Anticipo minimo 20%,US-03,total 100.02 (20% = 20.004),Minimo exigible 20.01 (redondeo hacia arriba),limite,unitaria,test_dominio.py,test_minimo_de_anticipo_se_redondea_hacia_arriba_al_centavo,1,PASSED
+CP-05,Vigencia 30 dias,Levantamiento p.2-3,dia 30 y dia 31 desde la creacion,Dia 30 vigente; dia 31 VENCIDO,limite,unitaria,test_dominio.py,test_vencimiento_limite_dia_30_vigente_dia_31_vence,1,PASSED
+CP-06,Penalizacion 10%,Levantamiento p.3 / US-05,anticipo 250.50 vencido,Saldo a favor 225.45,exito,unitaria,test_dominio.py,test_penalizacion_10_por_ciento_calculada_en_el_dominio,1,PASSED
+CP-07,Proceso nocturno idempotente,US-05,vencer dos veces el mismo apartado,Un solo ApartadoVencidoEvent,limite,unitaria,test_dominio.py,test_vencimiento_es_idempotente,1,PASSED
+CP-08,No abonar a vencido,US-05,POST abono a apartado VENCIDO,HTTP 409,error,api,test_api.py,test_abono_a_vencido_409,1,PASSED
+CP-09,Liberacion por vencimiento,US-05,proceso del dia 31 sobre SQLite,Serie DISPONIBLE y saldo a favor 162.72,exito,integracion,test_persistencia_sql.py,test_vencimiento_sobre_sql_libera_serie_y_calcula_saldo_a_favor,1,PASSED
+CP-10,Maximo 3 apartados activos,Levantamiento p.9,2 activos y 3 activos,Con 2 si puede; con 3 no,limite,unitaria,test_especificaciones.py,test_limite_de_apartados_frontera_2_si_3_no,1,PASSED
+CP-11,Maximo 3 apartados activos,Levantamiento p.9,cliente C004 pide un 4o apartado,Rechazo ReglaNegocioViolada,error,integracion,test_aplicacion.py,test_crear_apartado_rechazos,5,PASSED
+CP-12,Maximo 3 apartados activos,Levantamiento p.9,uno de los 3 vence y pide otro,Apartado ACTIVO,exito,integracion,test_aplicacion.py,test_cuarto_apartado_si_se_libera_uno,1,PASSED
+CP-13,Abonos y liquidacion,US-03,abono parcial luego saldo exacto,ACTIVO y luego LIQUIDADO con evento,exito,unitaria,test_dominio.py,test_abono_parcial_y_liquidacion,1,PASSED
+CP-14,Abono no excede saldo,Ficha Apartado U3,abono mayor al saldo,Rechazo DatosInvalidos,error,unitaria,test_dominio.py,test_abono_mayor_al_saldo_rechazado,1,PASSED
+CP-15,Abono positivo,Ficha Apartado U3,abono 0.00,Rechazo DatosInvalidos,limite,unitaria,test_dominio.py,test_abono_cero_rechazado,1,PASSED
+CP-16,Serie reservada no se vende,N-02 / SCR-01,vender directo una serie RESERVADA,TransicionInvalida,error,unitaria,test_dominio.py,test_item_reservado_no_se_vende_directo_ni_se_reserva_dos_veces,1,PASSED
+CP-17,Ciclo de vida de ItemSerie,N-03,DISPONIBLE-RESERVADO-DISPONIBLE-VENDIDO-DISPONIBLE,4 eventos en orden,exito,unitaria,test_dominio.py,test_item_flujo_valido,1,PASSED
+CP-18,Serie unica global,Levantamiento p.13,insertar la misma serie dos veces,IntegrityError (PK),error,integracion,test_persistencia_sql.py,test_pk_impide_dos_items_con_el_mismo_numero_de_serie,1,PASSED
+CP-19,Un apartado vigente por serie,N-02,dos apartados ACTIVO de una serie,IntegrityError (indice parcial),error,integracion,test_persistencia_sql.py,test_la_base_impide_dos_apartados_vigentes_de_la_misma_serie,1,PASSED
+CP-20,Cuadratura de pagos,US-12,4000 efectivo + 6000 tarjeta = 10000,Venta cerrada,exito,unitaria,test_dominio.py,test_venta_exito_pagos_combinados,1,PASSED
+CP-21,Cuadratura de pagos,US-12,pago 99.99 de 100.00,Rechazo ReglaNegocioViolada,error,unitaria,test_dominio.py,test_venta_pagos_no_cuadran,1,PASSED
+CP-22,Serie obligatoria,N-03 / US-02,linea sin serie en producto que la requiere,Rechazo ReglaNegocioViolada,error,unitaria,test_dominio.py,test_venta_falta_serie_obligatoria,1,PASSED
+CP-23,Serie no repetida en ticket,US-02,misma serie en dos lineas,Rechazo serie repetida,error,unitaria,test_dominio.py,test_venta_rechaza_la_misma_serie_dos_veces,1,PASSED
+CP-24,Devolucion 15 dias,Levantamiento p.5 / US-09,devolver en dia 15 y dia 16,Dia 15 procede; dia 16 no,limite,unitaria,test_especificaciones.py,test_devolucion_plazo_frontera_dia_15_si_16_no,1,PASSED
+CP-25,Devolucion con Supervisor,N-04 / US-10,V-0001 a 8 dias con clave valida,Nota de credito y serie DISPONIBLE,exito,integracion,test_aplicacion.py,test_devolucion_ok_reingresa_serie_y_emite_nota,1,PASSED
+CP-26,Devolucion sin dano del cliente,US-10,dano_cliente = true,Rechazo y sin cambios de estado,error,integracion,test_aplicacion.py,test_devolucion_rechazos_sin_cambiar_estado,8,PASSED
+CP-27,Clave de Supervisor obligatoria,CON-02,clave vacia o invalida,NoAutorizado,error,unitaria,test_especificaciones.py,test_politica_exige_supervisor,2,PASSED
+CP-28,Una devolucion por serie,US-09,devolver dos veces la misma serie,TransicionInvalida,error,integracion,test_aplicacion.py,test_devolucion_no_se_repite,1,PASSED
+CP-29,Commit persiste,ADR-03,crear apartado y abonar,Visible desde otra sesion con 2 abonos,exito,integracion,test_persistencia_sql.py,test_commit_hace_visible_el_apartado_con_sus_abonos,1,PASSED
+CP-30,Rollback descarta,ADR-03,salir del UoW sin commit,La serie sigue DISPONIBLE en la BD,error,integracion,test_persistencia_sql.py,test_salir_sin_commit_descarta_los_cambios,1,PASSED
+CP-31,Rollback a mitad de operacion,ADR-03,falla despues de bloquear la serie,Serie revertida a DISPONIBLE,error,integracion,test_persistencia_sql.py,test_falla_a_mitad_de_operacion_revierte_la_serie_ya_bloqueada,1,PASSED
+CP-32,Eventos solo tras commit,ADR-03,commit falla por PK duplicada,Cero eventos publicados y nada guardado,error,integracion,test_persistencia_sql.py,test_si_el_commit_falla_no_se_publican_eventos_ni_se_guarda_nada,1,PASSED
+CP-33,Dinero con Decimal,Reglas didacticas U4,guardar 336.00,Se almacena como texto decimal exacto,limite,integracion,test_persistencia_sql.py,test_el_dinero_se_guarda_como_texto_decimal_sin_float,1,PASSED
+CP-34,Pago con tarjeta aprobado,Alcance modulo de cobro,Mock pasarela devuelve True,Una llamada cobrar y serie VENDIDA,exito,integracion,test_pasarela_mock.py,test_pago_aprobado_cobra_una_vez_con_ticket_como_referencia,1,PASSED
+CP-35,Pago con tarjeta rechazado,Alcance modulo de cobro,Mock pasarela devuelve False,PagoRechazado y serie DISPONIBLE,error,integracion,test_pasarela_mock.py,test_pago_rechazado_lanza_error_y_no_vende_la_serie,1,PASSED
+CP-36,Pasarela caida,ASM-01 / CON-05,Mock lanza TimeoutError,ServicioNoDisponible y rollback,error,integracion,test_pasarela_mock.py,test_timeout_de_pasarela_es_servicio_no_disponible_y_hace_rollback,1,PASSED
+CP-37,Efectivo sin pasarela,Alcance modulo de cobro,pago en efectivo,La pasarela no se invoca,exito,integracion,test_pasarela_mock.py,test_efectivo_no_invoca_la_pasarela,1,PASSED
+CP-38,Matriz de autorizacion,CON-02 / Levantamiento p.11-12,8 roles x 8 acciones,Coincide con el oraculo,exito,unitaria,test_autorizacion.py,test_matriz_rol_accion,56,PASSED
+CP-39,Autenticacion previa,Seguridad,sin X-Rol o rol desconocido,HTTP 401,error,api,test_autorizacion.py,test_api_sin_rol_401_y_rol_desconocido_401,1,PASSED
+CP-40,Autenticacion no es autorizacion,CON-02,CAJERO sin clave de Supervisor,403 sin clave y 201 con clave,error,api,test_autorizacion.py,test_cajero_con_rol_valido_aun_necesita_clave_de_supervisor,1,PASSED
+CP-41,API crear apartado,US-03,POST /apartados valido,HTTP 201,exito,api,test_api.py,test_crear_apartado_201,1,PASSED
+CP-42,API recurso inexistente,Contrato API,GET apartado NOPE,HTTP 404,error,api,test_api.py,test_get_apartado_200_y_404,1,PASSED
+CP-43,API transicion invalida,Contrato API,entregar sin liquidar,HTTP 409,error,api,test_api.py,test_entrega_sin_liquidar_409,1,PASSED
+CP-44,OpenAPI documentado,PIA,GET /openapi.json,Contiene /apartados,exito,api,test_api.py,test_openapi_documentado,1,PASSED
+CP-45,Anticipo no excede el total,US-03,total 1000.00 anticipo 1000.01,Rechazo que indica que excede el total,error,unitaria,test_dominio.py,test_anticipo_mayor_al_total_se_rechaza_con_mensaje_claro,1,PASSED
+CP-46,Datos obligatorios del cliente,Levantamiento p.15,cliente sin telefono,Rechazo DatosInvalidos,error,unitaria,test_dominio.py,test_cliente_exige_nombre_telefono_y_correo,1,PASSED
+CP-47,Configuracion por entorno,PIA 12-Factor,DATABASE_URL definida o ausente,SQL o memoria segun el entorno,exito,integracion,test_persistencia_sql.py,test_configuracion_por_entorno_elige_la_persistencia,1,PASSED

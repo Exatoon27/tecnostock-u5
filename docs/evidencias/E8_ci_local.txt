@@ -1,0 +1,24 @@
+=== 1) VERDE (codigo original) ===
+[OK] Lint (ruff): All checks passed!
+[OK] Pruebas + cobertura >= 80%: 241 passed, 1 warning in 2.01s
+[OK] Escenarios E01-E15: bitacora.md generada
+[OK] Compilar src/: 
+PIPELINE VERDE
+exit=0
+
+=== 2) ROJO: se rompe a proposito el dominio (anticipo minimo 20% -> 10%) ===
+[OK] Lint (ruff): All checks passed!
+[FALLO] Pruebas + cobertura >= 80%: 11 failed, 230 passed, 1 warning in 2.36s
+   
+    FAILED tests/test_api.py::test_anticipo_insuficiente_422 - assert (201 == 422)
+    FAILED tests/test_aplicacion.py::test_crear_apartado_rechazado_hace_rollback_y_no_publica
+    FAILED tests/test_aplicacion.py::test_rechazo_de_anticipo_informa_minimo_y_faltante
+exit=1
+
+=== 3) VERDE de nuevo (se revierte el cambio) ===
+[OK] Lint (ruff): All checks passed!
+[OK] Pruebas + cobertura >= 80%: 241 passed, 1 warning in 2.27s
+[OK] Escenarios E01-E15: bitacora.md generada
+[OK] Compilar src/: 
+PIPELINE VERDE
+exit=0

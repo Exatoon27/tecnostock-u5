@@ -1,0 +1,14 @@
+vencimiento '<=' -> '<'                              DETECTADO -> tests/test_dominio.py::test_vencimiento_limite_dia_30_vigente_dia_31_vence
+anticipo 20% -> 10%                                  DETECTADO -> tests/test_api.py::test_anticipo_insuficiente_422
+penalizacion 10% -> 5%                               DETECTADO -> tests/test_api.py::test_vencimientos
+limite 3 -> 4 apartados                              DETECTADO -> tests/test_aplicacion.py::test_crear_apartado_rechazos[kw3-ReglaNegocioViolada]
+plazo devolucion 15 -> 16                            DETECTADO -> tests/test_especificaciones.py::test_devolucion_plazo_frontera_dia_15_si_16_no
+devolucion sin clave de supervisor                   DETECTADO -> tests/test_api.py::test_devolucion_201_403_422_404
+pagos que no cuadran se aceptan                      DETECTADO -> tests/test_api.py::test_venta_201_y_pago_descuadrado_422
+serie repetida en ticket se acepta                   DETECTADO -> tests/test_dominio.py::test_venta_rechaza_la_misma_serie_dos_veces
+pasarela rechazada se ignora                         DETECTADO -> tests/test_pasarela_mock.py::test_pago_rechazado_lanza_error_y_no_vende_la_serie
+rol ALMACEN puede vender                             DETECTADO -> tests/test_autorizacion.py::test_matriz_rol_accion[ALMACEN-PROCESAR_VENTA]
+memoria: sin rollback al salir sin commit            DETECTADO -> tests/test_api.py::test_venta_201_y_pago_descuadrado_422
+SQL: salir sin commit confirma en vez de revertir    DETECTADO -> tests/test_persistencia_sql.py::test_salir_sin_commit_descarta_los_cambios
+SQL: eventos publicados antes del commit             DETECTADO -> tests/test_persistencia_sql.py::test_si_el_commit_falla_no_se_publican_eventos_ni_se_guarda_nada
+SQL: sin indice unico de apartado vigente            DETECTADO -> tests/test_persistencia_sql.py::test_la_base_impide_dos_apartados_vigentes_de_la_misma_serie

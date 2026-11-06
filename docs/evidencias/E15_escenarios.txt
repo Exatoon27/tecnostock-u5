@@ -1,0 +1,16 @@
+E01 OK | SerieBloqueadaEvent, ApartadoCreadoEvent
+E02 RECHAZO ReglaNegocioViolada: No se puede apartar: el anticipo debe ser >= 20% del total (mínimo 67.20, faltan 0.01) | Ninguno
+E03 RECHAZO ReglaNegocioViolada: No se puede apartar: el cliente está inactivo | Ninguno
+E04 RECHAZO ReglaNegocioViolada: No se puede apartar: el cliente ya tiene 3 apartados activos | Ninguno
+E05 RECHAZO ReglaNegocioViolada: No se puede apartar: la serie no está DISPONIBLE | Ninguno
+E06 OK | AbonoRegistradoEvent
+E07 OK | AbonoRegistradoEvent, ApartadoLiquidadoEvent
+E08 RECHAZO DatosInvalidos: El abono 723.21 excede el saldo pendiente 723.20 | Ninguno
+E09 OK | Ninguno
+E10 OK | SerieLiberadaEvent, ApartadoVencidoEvent
+E11 RECHAZO TransicionInvalida: No se admiten abonos en un apartado VENCIDO | SerieLiberadaEvent, ApartadoVencidoEvent
+E12 OK | AbonoRegistradoEvent, ApartadoLiquidadoEvent, SerieVendidaEvent, ApartadoEntregadoEvent
+E13 RECHAZO TransicionInvalida: No se puede vender una serie en estado RESERVADO | Ninguno
+E14 OK | SerieLiberadaEvent, DevolucionAutorizadaEvent
+E15 RECHAZO ReglaNegocioViolada: Devolución rechazada: fuera del plazo de 15 días | Ninguno
+bitacora.md generada

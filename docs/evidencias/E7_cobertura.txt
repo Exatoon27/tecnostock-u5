@@ -1,0 +1,31 @@
+Name                               Stmts   Miss  Cover   Missing
+----------------------------------------------------------------
+src\__init__.py                        0      0   100%
+src\api\__init__.py                    0      0   100%
+src\api\main.py                       87      0   100%
+src\application\__init__.py            0      0   100%
+src\application\dto.py                75      0   100%
+src\application\manejadores.py         7      0   100%
+src\application\servicios.py         158      1    99%   83
+src\domain\__init__.py                 0      0   100%
+src\domain\apartado.py                84      0   100%
+src\domain\autorizacion.py            32      0   100%
+src\domain\devolucion.py              30      0   100%
+src\domain\entidades.py               21      0   100%
+src\domain\errores.py                 10      0   100%
+src\domain\especificaciones.py        70      1    99%   19
+src\domain\eventos.py                 31      0   100%
+src\domain\item_serie.py              41      0   100%
+src\domain\puertos.py                  6      0   100%
+src\domain\repositorios.py            19      0   100%
+src\domain\valores.py                 82      0   100%
+src\domain\venta.py                   63      0   100%
+src\infrastructure\__init__.py         0      0   100%
+src\infrastructure\carga_csv.py       45      5    89%   68-73, 78
+src\infrastructure\contenedor.py      55      0   100%
+src\infrastructure\memoria.py         86      0   100%
+src\infrastructure\pasarela.py         9      0   100%
+src\infrastructure\sql.py            225      0   100%
+----------------------------------------------------------------
+TOTAL                               1236      7    99%
+Required test coverage of 80% reached. Total coverage: 99.43%

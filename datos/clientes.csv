@@ -1,0 +1,13 @@
+cliente_id,nombre,telefono,correo,activo
+TEC-C001,Comprador 01,8100000001,tec-c001@ejemplo.mx,1
+TEC-C002,Comprador 02,8100000002,tec-c002@ejemplo.mx,1
+TEC-C003,Comprador 03,8100000003,tec-c003@ejemplo.mx,1
+TEC-C004,Comprador 04,8100000004,tec-c004@ejemplo.mx,1
+TEC-C005,Comprador 05,8100000005,tec-c005@ejemplo.mx,1
+TEC-C006,Comprador 06,8100000006,tec-c006@ejemplo.mx,1
+TEC-C007,Comprador 07,8100000007,tec-c007@ejemplo.mx,0
+TEC-C008,Comprador 08,8100000008,tec-c008@ejemplo.mx,1
+TEC-C009,Comprador 09,8100000009,tec-c009@ejemplo.mx,1
+TEC-C010,Comprador 10,8100000010,tec-c010@ejemplo.mx,1
+TEC-C011,Comprador 11,8100000011,tec-c011@ejemplo.mx,1
+TEC-C012,Comprador 12,8100000012,tec-c012@ejemplo.mx,1

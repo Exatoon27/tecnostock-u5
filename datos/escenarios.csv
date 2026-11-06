@@ -1,0 +1,16 @@
+caso_id,accion,fecha,parametros,objetivo,pista
+E01,crear_apartado,2026-11-05,cliente=TEC-C001;serie=SN-LAP-0001;anticipo=67.20,ACTIVO + serie RESERVADO,Anticipo exactamente 20% (336.00 x 0.20)
+E02,crear_apartado,2026-11-05,cliente=TEC-C002;serie=SN-LAP-0002;anticipo=67.19,rechazo,Anticipo menor al 20%; la serie sigue DISPONIBLE
+E03,crear_apartado,2026-11-05,cliente=TEC-C007;serie=SN-LAP-0003;anticipo=67.20,rechazo,Cliente inactivo
+E04,crear_apartado,2026-11-05,cliente=TEC-C004;serie=SN-LAP-0004;anticipo=67.20,rechazo,Cliente con 3 apartados activos (maximo 3)
+E05,crear_apartado,2026-11-05,cliente=TEC-C001;serie=SN-LAP-0005;anticipo=124.00,rechazo,Serie ya RESERVADA por AP-0001
+E06,registrar_abono,2026-11-03,folio=AP-0004;monto=100.00,ACTIVO + AbonoRegistradoEvent,Abono parcial; saldo baja a 623.20
+E07,registrar_abono,2026-11-03,folio=AP-0004;monto=723.20,LIQUIDADO,Abono que cubre el saldo exacto
+E08,registrar_abono,2026-11-03,folio=AP-0004;monto=723.21,rechazo,Abono mayor al saldo pendiente
+E09,procesar_vencimientos,2026-11-05,folio=AP-0005,sin cambios,Dia 30 exacto: aun vigente (limite es estricto >30 dias)
+E10,procesar_vencimientos,2026-11-06,folio=AP-0005,VENCIDO + saldo a favor 162.72,Dia 31: serie liberada y penalizacion 10% sobre 180.80
+E11,abono_tras_vencimiento,2026-11-06,folio=AP-0005;monto=50.00,rechazo,Abono a apartado ya VENCIDO
+E12,entregar_apartado,2026-11-03,folio=AP-0004;monto=723.20,ENTREGADO + serie VENDIDO,Liquidar y entregar
+E13,venta_directa,2026-11-05,serie=SN-LAP-0005;metodo=EFECTIVO,rechazo,Serie RESERVADA no se vende directo
+E14,devolucion,2026-11-05,ticket=V-0001;serie=SN-LAP-0011;clave=SUP-001,nota de credito + serie DISPONIBLE,Devolucion a 8 dias con Supervisor valido
+E15,devolucion,2026-11-05,ticket=V-0002;serie=SN-LAP-0012;clave=SUP-001,rechazo,Devolucion a 21 dias (>15)
